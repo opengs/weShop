@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from database import register_db
-from services.cart import register_cart_service
+from .database import register_db
+from .services.cart import register_cart_service
 
 from .routes.cart import router as carts_router
 
