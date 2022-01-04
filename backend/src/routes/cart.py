@@ -2,7 +2,7 @@ from fastapi.routing import APIRoute, APIRouter
 
 from ..services.cart import get_cart as get_cart_service, CartModel
 
-router = APIRouter
+router = APIRouter()
 
 @router.get(
     "/cart",
