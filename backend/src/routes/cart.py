@@ -6,6 +6,7 @@ from ..services.cart import (
     get_cart as get_cart_service,
     add_product as add_product_service,
     remove_product as remove_product_service,
+    realize_product,
     CartModel
 )
 
@@ -36,3 +37,13 @@ class DeleteProductRequest(BaseModel):
 )
 async def remove_product(data: DeleteProductRequest = Depends()):
     await remove_product_service("DEFAULT", data.name)
+
+class PutInCartProductRequest(BaseModel):
+    name: str = Field(..., description="Name of the product")
+    put: bool = Field(..., description="Put product in cart or not")
+
+@router.patch(
+    "/product"
+)
+async def put_in_cart_product(data: PutInCartProductRequest = Body(...)):
+    await realize_product("DEFAULT", data.name, data.put)
